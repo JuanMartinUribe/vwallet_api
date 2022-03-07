@@ -14,7 +14,7 @@ class MainUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=100)
     def __str__(self):
-            return self.username 
+            return self.user.username 
 class Pocket(models.Model):
     class PocketObjects(models.Manager):
         def get_queryset(self):
