@@ -7,24 +7,17 @@ from django.contrib.auth.models import User
 class PocketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pocket
-        fields = ('id','user','name','quantity','status')
+        fields = ['name','quantity','status']
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email','first_name','last_name']
 
 class MainUserSerializer(serializers.ModelSerializer):
-    
-    user = serializers.SlugRelatedField(
-        read_only = True,
-        slug_field='username',
-    
-    )
-    
-    pockets = serializers.StringRelatedField(many=True)
+    user = UserSerializer()
+    pockets = PocketSerializer(many=True)
 
-    
     class Meta:
         model = MainUser
         fields = ['user','phone_number','pockets']
-class UserSerializer(serializers.ModelSerializer):
-    pockets = serializers.StringRelatedField(many=True)
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'id','pockets')
