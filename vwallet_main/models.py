@@ -8,7 +8,7 @@ class MainUser(models.Model):
         def get_queryset(self):
             return super().get_queryset().all()
             
-    username = models.CharField(max_length=150)
+    
     objects = models.Manager()
     mainuserobjects = MainUserObjects()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
